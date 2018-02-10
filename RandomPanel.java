@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -25,6 +26,8 @@ public class RandomPanel
 	private JButton button3;
 	private JLabel label;
 	int i;
+	//int[] score=new int[3];
+	int x;
 	JFrame frame = new JFrame();
 	private int WINDOW_WIDTH = 800;
 	private int WINDOW_HEIGHT = 600;
@@ -76,9 +79,11 @@ public class RandomPanel
 		infoPanel = new JPanel();
 		infoPanel.setBackground(Color.YELLOW);
 		JLabel label = new JLabel(new ImageIcon(new URL("https://i.pinimg.com/originals/c4/85/25/c48525fa2233aeb354c5cdc03befadb5.jpg")), SwingConstants.CENTER);
-		JLabel textLabel = new JLabel("LETS PLAY A GAME");
+		JLabel textLabel = new JLabel("LETS PLAY A GAME\n");
+		JLabel scoreLabel = new JLabel("\nScore: " + x);
 		infoPanel.add(label, border.NORTH);
 		infoPanel.add(textLabel, border.CENTER);
+		infoPanel.add(scoreLabel,border.NORTH);
 		
 	}
 	public void buildPanel()
@@ -104,22 +109,27 @@ public class RandomPanel
 		{
 			/* i randomly is set to 1, 2 or 3. 
 			 * if i = 2 the panel will change to green and you can continue playing
-			 * if i = 1 or 3, it will close the window and you have to run the program again to play again
+			 * if i = 1 or 3, you loose and play again.
 			 */
-			i = rand.nextInt(3);
-			if (i == 2)
-			{
-				panel.setBackground(Color.GREEN);
-				infoPanel.setBackground(Color.GREEN);
-				JOptionPane.showMessageDialog(null, "you win");
-				panel.setBackground(Color.YELLOW);
-				infoPanel.setBackground(Color.YELLOW);
-			}
-			else
-			{
-				//System.exit(0);
-				JOptionPane.showMessageDialog(null,"you lose");
-			}
+			i = rand.nextInt(3);			
+			
+				if (i == 2)
+				{
+					x+=1;	
+					panel.setBackground(Color.GREEN);
+					infoPanel.setBackground(Color.GREEN);
+					JOptionPane.showMessageDialog(null, "you win\nyour score is: " +x);
+					
+					panel.setBackground(Color.YELLOW);
+					infoPanel.setBackground(Color.YELLOW);
+					//for(int x=0;x<score.length;x++)
+						//score[x]=score[x+1] ;	
+				}
+				else
+				{
+					//System.exit(0);
+					JOptionPane.showMessageDialog(null,"you lose");
+				}
 			
 		}
    }
